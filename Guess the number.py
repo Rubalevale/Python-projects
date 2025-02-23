@@ -2,44 +2,7 @@ import random #library
 
 #global casting
 NUM_DIGITS = 3 #size of the number.
-MAX_GUESTS = 2 #number of guests allowed per game.
-
-def get_secret_nbr():
-    """Returns a string made of NUM_DIGITS random digits"""
-
-    numbers = list('1234567890') #create a list from 0 to 9.
-    random.shuffle(numbers) #shuffle numbers in random order
-    
-    #Get the numbers for NUM_DIGITS out of the pool.
-    secret_nbr = ''
-    for i in range(NUM_DIGITS):
-        secret_nbr += str(numbers[i])
-    return secret_nbr
-
-def get_clues(guess, secret_nbr):
-    """Returns a string with cold, warm, hot clues for a guess
-    and a secret number pair"""
-
-    if guess == secret_nbr:
-        return 'That is correct!'
-    
-    #Conditionals for the clues and append to clues
-    clues = []
-
-    for i in range(len(guess)):
-        if guess[i] == secret_nbr:
-            #correct digit, correct place.
-            clues.append('Fermi') 
-        elif guess [i] in secret_nbr:
-            #correct digit, incorrect place.
-            clues.append('Pico') 
-    #if clues does not have anything it means that no digits are correct
-    if len(clues) == 0:
-        return 'Bagels'
-    else:
-    #sort in alphabetical order to not give extra clues.
-        clues.sort()
-        return ' '.join(clues)
+MAX_GUESTS = 10 #number of guests allowed per game.
 
 def main():
     print('''Bagels, a deductive logic game.
@@ -85,6 +48,43 @@ When I say:     That means:
         if response.startswith('n'):
             print("Thanks for playing")
             break
+
+def get_secret_nbr():
+    """Returns a string made of NUM_DIGITS random digits"""
+
+    numbers = list('1234567890') #create a list from 0 to 9.
+    random.shuffle(numbers) #shuffle numbers in random order
+    
+    #Get the numbers for NUM_DIGITS out of the pool.
+    secret_nbr = ''
+    for i in range(NUM_DIGITS):
+        secret_nbr += str(numbers[i])
+    return secret_nbr
+
+def get_clues(guess, secret_nbr):
+    """Returns a string with cold, warm, hot clues for a guess
+    and a secret number pair"""
+
+    if guess == secret_nbr:
+        return 'That is correct!'
+    
+    #Conditionals for the clues and append to clues
+    clues = []
+
+    for i in range(len(guess)):
+        if guess[i] == secret_nbr:
+            #correct digit, correct place.
+            clues.append('Fermi') 
+        elif guess [i] in secret_nbr:
+            #correct digit, incorrect place.
+            clues.append('Pisco') 
+    #if clues does not have anything it means that no digits are correct
+    if len(clues) == 0:
+        return 'Bagels'
+    else:
+    #sort in alphabetical order to not give extra clues.
+        clues.sort()
+        return ' '.join(clues)
 
 if __name__ == '__main__':
     main()
